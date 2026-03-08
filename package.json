@@ -7,7 +7,9 @@
   },
   "scripts": {
     "test": "jest",
-    "build": "tsc"
+    "build": "tsc",
+    "validate-skill": "ts-node skill/scripts/validate-skill.ts",
+    "validate-encounter": "ts-node skill/scripts/validate-encounter.ts"
   },
   "keywords": [],
   "author": "",

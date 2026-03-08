@@ -26,21 +26,37 @@ A TypeScript validation engine that agents run to verify encounter balance. Give
 - **Stat block validation** — checks against tier benchmarks
 - **Composition analysis** — type mix, tier mismatches, warnings
 
-### Agent Instructions (`CLAUDE.md`)
+### Distributable Skill (`skill/`)
 
-Tells the agent how to look up rules, build encounters, and — critically — validates every encounter through the script before presenting it.
+The `skill/` directory contains everything needed for Claude Code skill distribution:
+
+```
+skill/
+  SKILL.md                        # Main skill (88 lines, ~969 tokens)
+  encounter-schema.md             # Validator input/output schema reference
+  scripts/
+    validate-encounter.ts         # CLI: validate encounter JSON
+    validate-skill.ts             # CLI: validate SKILL.md against conventions
+```
+
+To install as a personal skill, copy or symlink the `skill/` directory:
+
+```bash
+ln -s /path/to/daggerheart-skill/skill ~/.claude/skills/daggerheart
+```
 
 ## Setup
 
 ```bash
 npm install
-npm test       # 33 tests
-npm run build  # compile TypeScript
+npm test              # 33 tests
+npm run build         # compile TypeScript
+npm run validate-skill  # check SKILL.md against skill spec
 ```
 
 ## Usage
 
-Start a Claude Code session from this directory. The `CLAUDE.md` will be picked up automatically, giving the agent access to the full rules reference and the encounter validation workflow.
+Start a Claude Code session from this directory. The skill will be available as `/daggerheart` and will auto-trigger on Daggerheart-related questions.
 
 ## Source Material
 
