@@ -62,6 +62,146 @@ export interface ValidationIssue {
   message: string;
 }
 
+// ── Campaign & PC types ──
+
+export type ClassName =
+  | "Bard"
+  | "Druid"
+  | "Guardian"
+  | "Ranger"
+  | "Rogue"
+  | "Seraph"
+  | "Sorcerer"
+  | "Warrior"
+  | "Wizard";
+
+export type Ancestry =
+  | "Clank"
+  | "Drakona"
+  | "Dwarf"
+  | "Elf"
+  | "Faerie"
+  | "Faun"
+  | "Firbolg"
+  | "Fungril"
+  | "Galapa"
+  | "Giant"
+  | "Goblin"
+  | "Halfling"
+  | "Human"
+  | "Infernis"
+  | "Katari"
+  | "Orc"
+  | "Ribbet"
+  | "Simiah"
+  | "Mixed";
+
+export type Community =
+  | "Highborne"
+  | "Loreborne"
+  | "Orderborne"
+  | "Ridgeborne"
+  | "Seaborne"
+  | "Slyborne"
+  | "Underborne"
+  | "Wanderborne"
+  | "Wildborne";
+
+export interface Traits {
+  agility: number;
+  strength: number;
+  finesse: number;
+  instinct: number;
+  presence: number;
+  knowledge: number;
+}
+
+export interface Weapon {
+  name: string;
+  trait: keyof Traits;
+  range: string;
+  damageDice: string;
+  hands: "one" | "two";
+}
+
+export interface Armor {
+  name: string;
+  baseScore: number;
+  baseThresholds: { major: number; severe: number };
+  slots: number;
+  feature?: string;
+}
+
+export interface Experience {
+  name: string;
+  modifier: number;
+}
+
+export interface DomainCard {
+  domain: string;
+  name: string;
+  level: number;
+}
+
+export interface PlayerCharacter {
+  // Identity
+  name: string;
+  pronouns?: string;
+  player: string;
+
+  // Step 1: Class & Subclass
+  class: ClassName;
+  subclass: string;
+
+  // Step 2: Heritage
+  ancestry: Ancestry;
+  ancestryFeatures: string[];
+  community: Community;
+  communityFeature: string;
+
+  // Step 3: Traits
+  traits: Traits;
+
+  // Step 4: Character Info
+  level: number;
+  evasion: number;
+  hp: number;
+  hpMax: number;
+  stress: number;
+  stressMax: number;
+  hope: number;
+
+  // Step 5: Equipment
+  weapons: Weapon[];
+  armor: Armor;
+  proficiency: number;
+  inventory: string[];
+  gold: number;
+
+  // Step 6: Background
+  background: string;
+
+  // Step 7: Experiences
+  experiences: Experience[];
+
+  // Step 8: Domain Cards
+  domainCards: DomainCard[];
+
+  // Step 9: Connections
+  connections: string[];
+}
+
+export interface Campaign {
+  name: string;
+  tier: Tier;
+  numPCs: number;
+  createdAt: string;
+  pcs: string[];
+  sessionCount: number;
+}
+
+// ── Encounter types ──
+
 export interface EncounterReport {
   /** Total battle points available after modifier adjustments. */
   budgetTotal: number;

@@ -9,7 +9,10 @@
     "test": "jest",
     "build": "tsc",
     "validate-skill": "ts-node skills/daggerheart/scripts/validate-skill.ts",
-    "validate-encounter": "ts-node skills/daggerheart/scripts/validate-encounter.ts"
+    "validate-encounter": "ts-node skills/daggerheart/scripts/validate-encounter.ts",
+    "init-campaign": "ts-node scripts/init-campaign.ts",
+    "create-pc": "ts-node scripts/create-pc.ts",
+    "new-session": "ts-node scripts/new-session.ts"
   },
   "keywords": [],
   "author": "",
