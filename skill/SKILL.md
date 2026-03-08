@@ -69,8 +69,8 @@ When building or recommending an encounter, you **must** validate it before pres
 
 **Workflow:**
 1. Look up adversary stat blocks from the tier docs.
-2. Build the encounter JSON (see `${CLAUDE_PLUGIN_ROOT}/skill/encounter-schema.md` for the full schema).
-3. Run: `npx ts-node ${CLAUDE_PLUGIN_ROOT}/skill/scripts/validate-encounter.ts '<JSON>'`
+2. Build the encounter JSON (see `${CLAUDE_PLUGIN_ROOT}/encounter-schema.md` for the full schema).
+3. Run: `npx ts-node ${CLAUDE_PLUGIN_ROOT}/scripts/validate-encounter.ts '<JSON>'`
 4. If the output contains "REQUIRES REVISION", adjust and re-validate.
 5. Only present the encounter once it passes.
 

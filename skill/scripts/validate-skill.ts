@@ -93,12 +93,12 @@ function validate(): Issue[] {
   const pluginRootRefs = body.match(/\$\{CLAUDE_PLUGIN_ROOT\}/g) || [];
   issues.push({ level: "info", message: `\${CLAUDE_PLUGIN_ROOT} references: ${pluginRootRefs.length}` });
 
-  // --- Check referenced files exist ---
+  // --- Check referenced files exist (relative to skill dir) ---
   const docRefs = body.match(/docs\/[a-z0-9-]+\.md/g) || [];
   const uniqueDocRefs = [...new Set(docRefs)];
   let missingDocs = 0;
   for (const ref of uniqueDocRefs) {
-    const fullPath = path.join(REPO_ROOT, ref);
+    const fullPath = path.join(SKILL_DIR, ref);
     if (!fs.existsSync(fullPath)) {
       issues.push({ level: "error", message: `Referenced file not found: ${ref}` });
       missingDocs++;
@@ -106,12 +106,13 @@ function validate(): Issue[] {
   }
   issues.push({ level: "info", message: `Doc references: ${uniqueDocRefs.length} files (${missingDocs} missing)` });
 
-  // Check supporting skill files
-  const skillFileRefs = body.match(/skill\/[a-z0-9-/.]+/g) || [];
-  for (const ref of [...new Set(skillFileRefs)]) {
-    const fullPath = path.join(REPO_ROOT, ref);
+  // Check supporting files referenced via ${CLAUDE_PLUGIN_ROOT}/
+  const supportRefs = body.match(/\$\{CLAUDE_PLUGIN_ROOT\}\/([a-z0-9-/.]+)/g) || [];
+  for (const ref of [...new Set(supportRefs)]) {
+    const relPath = ref.replace("${CLAUDE_PLUGIN_ROOT}/", "");
+    const fullPath = path.join(SKILL_DIR, relPath);
     if (!fs.existsSync(fullPath)) {
-      issues.push({ level: "warning", message: `Referenced skill file not found: ${ref}` });
+      issues.push({ level: "warning", message: `Referenced file not found: ${relPath}` });
     }
   }
 

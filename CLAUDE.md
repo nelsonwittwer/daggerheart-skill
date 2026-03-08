@@ -1,17 +1,17 @@
 # Daggerheart Skill — Project Instructions
 
-The distributable skill lives in `skill/SKILL.md`. The docs, validator source, and tests are at the repo root.
+The distributable skill lives in `skill/`. Everything the skill needs ships inside that directory.
 
 ## Project Structure
 
 ```
-skill/                  # Distributable skill directory
+skill/                  # Self-contained distributable skill
   SKILL.md              # Main skill file (frontmatter + instructions)
   encounter-schema.md   # Supporting: validator input/output schema
+  docs/                 # SRD reference (47 markdown files)
   scripts/
     validate-encounter.ts  # CLI: validate an encounter JSON
     validate-skill.ts      # CLI: validate SKILL.md against conventions
-docs/                   # SRD reference (47 files)
 src/                    # Encounter validator source + tests
 ```
 

@@ -4,18 +4,21 @@ An AI agent skill for running [Daggerheart](https://www.daggerheart.com/) tablet
 
 ## What's Included
 
-### Rules Reference (`docs/`)
+### Distributable Skill (`skill/`)
 
-47 markdown files covering the full Daggerheart SRD, split by topic for fast agent lookup:
+The `skill/` directory is self-contained — everything ships together:
 
-- Classes, ancestries, communities
-- Core mechanics, combat, conditions
-- Equipment tables (weapons, armor, loot, consumables)
-- GM guidance and difficulty benchmarks
-- 100+ adversary stat blocks across 4 tiers
-- Environment stat blocks
-- Domain card references (all 9 domains)
-- The Witherwild campaign frame
+```
+skill/
+  SKILL.md                        # Main skill (88 lines, ~969 tokens)
+  encounter-schema.md             # Validator input/output schema reference
+  docs/                           # 47 markdown files covering the full SRD
+  scripts/
+    validate-encounter.ts         # CLI: validate encounter JSON
+    validate-skill.ts             # CLI: validate SKILL.md against conventions
+```
+
+**Rules reference** (`skill/docs/`): classes, ancestries, communities, core mechanics, combat, equipment, GM guidance, 100+ adversary stat blocks, environments, domain cards, and the Witherwild campaign frame.
 
 ### Encounter Validator (`src/`)
 
@@ -25,19 +28,6 @@ A TypeScript validation engine that agents run to verify encounter balance. Give
 - **Severity rating** — trivial / easy / balanced / hard / deadly
 - **Stat block validation** — checks against tier benchmarks
 - **Composition analysis** — type mix, tier mismatches, warnings
-
-### Distributable Skill (`skill/`)
-
-The `skill/` directory contains everything needed for Claude Code skill distribution:
-
-```
-skill/
-  SKILL.md                        # Main skill (88 lines, ~969 tokens)
-  encounter-schema.md             # Validator input/output schema reference
-  scripts/
-    validate-encounter.ts         # CLI: validate encounter JSON
-    validate-skill.ts             # CLI: validate SKILL.md against conventions
-```
 
 To install as a personal skill, copy or symlink the `skill/` directory:
 
