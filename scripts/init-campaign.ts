@@ -29,7 +29,7 @@ if (pcErr) { console.error(`Error: ${pcErr}`); process.exit(1); }
 const tierErr = validateTier(tier);
 if (tierErr) { console.error(`Error: ${tierErr}`); process.exit(1); }
 
-const root = path.resolve(__dirname, "..", "campaigns", name);
+const root = path.resolve(process.cwd(), "campaigns", name);
 if (fs.existsSync(root)) {
   console.error(`Error: campaign directory already exists at ${root}`);
   process.exit(1);

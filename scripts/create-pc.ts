@@ -17,7 +17,7 @@ if (!campaignName || !pcJson) {
   process.exit(1);
 }
 
-const campaignDir = path.resolve(__dirname, "..", "campaigns", campaignName);
+const campaignDir = path.resolve(process.cwd(), "campaigns", campaignName);
 const campaignFile = path.join(campaignDir, "campaign.json");
 
 if (!fs.existsSync(campaignFile)) {
