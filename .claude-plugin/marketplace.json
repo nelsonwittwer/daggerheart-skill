@@ -1,0 +1,13 @@
+{
+  "name": "daggerheart-marketplace",
+  "owner": {
+    "name": "Nelson Wittwer"
+  },
+  "plugins": [
+    {
+      "name": "daggerheart",
+      "description": "Daggerheart TTRPG game master assistant with rules reference, encounter building, and balance validation",
+      "source": "./"
+    }
+  ]
+}
