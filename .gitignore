@@ -1,0 +1,5 @@
+node_modules/
+dist/
+*.pdf
+raw_text.txt
+cleaned_text.txt
