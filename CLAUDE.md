@@ -1,18 +1,21 @@
 # Daggerheart Skill — Project Instructions
 
-The distributable skill lives in `skill/`. Everything the skill needs ships inside that directory.
+This is a Claude Code plugin. The skill and all its assets live in `skills/daggerheart/`.
 
 ## Project Structure
 
 ```
-skill/                  # Self-contained distributable skill
-  SKILL.md              # Main skill file (frontmatter + instructions)
-  encounter-schema.md   # Supporting: validator input/output schema
-  docs/                 # SRD reference (47 markdown files)
-  scripts/
-    validate-encounter.ts  # CLI: validate an encounter JSON
-    validate-skill.ts      # CLI: validate SKILL.md against conventions
-src/                    # Encounter validator source + tests
+.claude-plugin/
+  plugin.json                      # Plugin manifest for official marketplace
+skills/
+  daggerheart/
+    SKILL.md                       # Main skill file (frontmatter + instructions)
+    encounter-schema.md            # Supporting: validator input/output schema
+    docs/                          # SRD reference (47 markdown files)
+    scripts/
+      validate-encounter.ts        # CLI: validate an encounter JSON
+      validate-skill.ts            # CLI: validate SKILL.md against conventions
+src/                               # Encounter validator source + tests
 ```
 
 ## Commands
@@ -23,4 +26,4 @@ src/                    # Encounter validator source + tests
 
 ## Editing the Skill
 
-When modifying `skill/SKILL.md`, run `npm run validate-skill` afterward to confirm it stays within conventions (line count, token estimate, frontmatter validity, file references).
+When modifying `skills/daggerheart/SKILL.md`, run `npm run validate-skill` afterward to confirm it stays within conventions (line count, token estimate, frontmatter validity, file references).

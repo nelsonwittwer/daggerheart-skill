@@ -1,0 +1,19 @@
+{
+  "name": "daggerheart",
+  "description": "Daggerheart TTRPG game master assistant with rules reference, encounter building, and balance validation",
+  "version": "1.0.0",
+  "author": {
+    "name": "Nelson Wittwer"
+  },
+  "repository": "https://github.com/nelsonwittwer/daggerheart-skill",
+  "license": "ISC",
+  "keywords": [
+    "daggerheart",
+    "ttrpg",
+    "tabletop",
+    "rpg",
+    "game-master",
+    "encounter-builder",
+    "critical-role"
+  ]
+}

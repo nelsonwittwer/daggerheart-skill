@@ -4,21 +4,25 @@ An AI agent skill for running [Daggerheart](https://www.daggerheart.com/) tablet
 
 ## What's Included
 
-### Distributable Skill (`skill/`)
+### Plugin Structure
 
-The `skill/` directory is self-contained — everything ships together:
+This repo is a Claude Code plugin, structured for the official marketplace:
 
 ```
-skill/
-  SKILL.md                        # Main skill (88 lines, ~969 tokens)
-  encounter-schema.md             # Validator input/output schema reference
-  docs/                           # 47 markdown files covering the full SRD
-  scripts/
-    validate-encounter.ts         # CLI: validate encounter JSON
-    validate-skill.ts             # CLI: validate SKILL.md against conventions
+.claude-plugin/
+  plugin.json                     # Plugin manifest
+skills/
+  daggerheart/
+    SKILL.md                      # Main skill (~966 tokens)
+    encounter-schema.md           # Validator input/output schema
+    docs/                         # 47 markdown files covering the full SRD
+    scripts/
+      validate-encounter.ts       # CLI: validate encounter JSON
+      validate-skill.ts           # CLI: validate SKILL.md against conventions
+src/                              # Encounter validator source + tests
 ```
 
-**Rules reference** (`skill/docs/`): classes, ancestries, communities, core mechanics, combat, equipment, GM guidance, 100+ adversary stat blocks, environments, domain cards, and the Witherwild campaign frame.
+**Rules reference** (`skills/daggerheart/docs/`): classes, ancestries, communities, core mechanics, combat, equipment, GM guidance, 100+ adversary stat blocks, environments, domain cards, and the Witherwild campaign frame.
 
 ### Encounter Validator (`src/`)
 
@@ -29,10 +33,12 @@ A TypeScript validation engine that agents run to verify encounter balance. Give
 - **Stat block validation** — checks against tier benchmarks
 - **Composition analysis** — type mix, tier mismatches, warnings
 
-To install as a personal skill, copy or symlink the `skill/` directory:
+## Installation
+
+Install from the official Claude Code plugin marketplace:
 
 ```bash
-ln -s /path/to/daggerheart-skill/skill ~/.claude/skills/daggerheart
+/plugin install daggerheart
 ```
 
 ## Setup

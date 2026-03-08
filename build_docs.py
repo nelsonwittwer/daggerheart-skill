@@ -4,7 +4,7 @@ import os
 import re
 
 INPUT_PATH = "cleaned_text.txt"
-DOCS_DIR = "skill/docs"
+DOCS_DIR = "skills/daggerheart/docs"
 
 # Section definitions: (output_filename, start_line, end_line, title)
 # Lines are 1-indexed to match the cleaned_text.txt file

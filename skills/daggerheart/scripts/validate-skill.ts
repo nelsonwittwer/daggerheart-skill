@@ -17,7 +17,7 @@ import * as path from "path";
 
 const SKILL_DIR = path.resolve(__dirname, "..");
 const SKILL_PATH = path.join(SKILL_DIR, "SKILL.md");
-const REPO_ROOT = path.resolve(SKILL_DIR, "..");
+const REPO_ROOT = path.resolve(SKILL_DIR, "../..");
 
 interface Issue {
   level: "error" | "warning" | "info";
@@ -93,9 +93,10 @@ function validate(): Issue[] {
   const pluginRootRefs = body.match(/\$\{CLAUDE_PLUGIN_ROOT\}/g) || [];
   issues.push({ level: "info", message: `\${CLAUDE_PLUGIN_ROOT} references: ${pluginRootRefs.length}` });
 
-  // --- Check referenced files exist (relative to skill dir) ---
-  const docRefs = body.match(/docs\/[a-z0-9-]+\.md/g) || [];
-  const uniqueDocRefs = [...new Set(docRefs)];
+  // --- Check referenced doc files ---
+  // Matches both `DOCS/filename.md` shorthand and full `${CLAUDE_PLUGIN_ROOT}/.../docs/filename.md`
+  const docRefs = body.match(/(?:DOCS|docs)\/[a-z0-9-]+\.md/g) || [];
+  const uniqueDocRefs = [...new Set(docRefs.map((r) => r.replace(/^DOCS\//, "docs/")))];
   let missingDocs = 0;
   for (const ref of uniqueDocRefs) {
     const fullPath = path.join(SKILL_DIR, ref);
@@ -107,10 +108,11 @@ function validate(): Issue[] {
   issues.push({ level: "info", message: `Doc references: ${uniqueDocRefs.length} files (${missingDocs} missing)` });
 
   // Check supporting files referenced via ${CLAUDE_PLUGIN_ROOT}/
-  const supportRefs = body.match(/\$\{CLAUDE_PLUGIN_ROOT\}\/([a-z0-9-/.]+)/g) || [];
+  // These resolve from the repo root (plugin root), not the skill dir
+  const supportRefs = body.match(/\$\{CLAUDE_PLUGIN_ROOT\}\/([a-zA-Z0-9-_/.]+\.(?:md|ts|json))/g) || [];
   for (const ref of [...new Set(supportRefs)]) {
     const relPath = ref.replace("${CLAUDE_PLUGIN_ROOT}/", "");
-    const fullPath = path.join(SKILL_DIR, relPath);
+    const fullPath = path.join(REPO_ROOT, relPath);
     if (!fs.existsSync(fullPath)) {
       issues.push({ level: "warning", message: `Referenced file not found: ${relPath}` });
     }

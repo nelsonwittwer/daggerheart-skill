@@ -7,8 +7,8 @@
  * the validation report to stdout.
  */
 
-import { validateEncounter } from "../../src/encounter-validator";
-import type { EncounterInput } from "../../src/types";
+import { validateEncounter } from "../../../src/encounter-validator";
+import type { EncounterInput } from "../../../src/types";
 
 const input = process.argv[2];
 

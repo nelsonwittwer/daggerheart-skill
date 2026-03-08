@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "directories": {
-    "doc": "docs"
+    "doc": "skills/daggerheart/docs"
   },
   "scripts": {
     "test": "jest",
     "build": "tsc",
-    "validate-skill": "ts-node skill/scripts/validate-skill.ts",
-    "validate-encounter": "ts-node skill/scripts/validate-encounter.ts"
+    "validate-skill": "ts-node skills/daggerheart/scripts/validate-skill.ts",
+    "validate-encounter": "ts-node skills/daggerheart/scripts/validate-encounter.ts"
   },
   "keywords": [],
   "author": "",
