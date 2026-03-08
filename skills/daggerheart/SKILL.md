@@ -55,6 +55,28 @@ Start with `DOCS/00-index.md` for the full topic map, then read the relevant fil
 - Walk through the 9-step process from `DOCS/02-character-creation.md`.
 - Reference the specific class file for subclass details.
 - Pull ancestry/community features from their respective docs files.
+- After completing character creation, save the PC using the campaign scripts (see below).
+
+## Campaign State
+
+Persist campaign data across sessions using these scripts. Campaigns are saved in the user's working directory under `campaigns/`.
+
+**Initialize a campaign:**
+```
+npx ts-node ${CLAUDE_PLUGIN_ROOT}/scripts/init-campaign.ts '<campaign-name>' <num-pcs> [tier]
+```
+
+**Save a PC after character creation:**
+```
+npx ts-node ${CLAUDE_PLUGIN_ROOT}/scripts/create-pc.ts '<campaign-name>' '<PC JSON>'
+```
+The PC JSON must include: name, player, class, subclass, ancestry, community, traits, level, evasion, hp, hpMax, stress, stressMax, hope, weapons, armor, proficiency, experiences, domainCards.
+
+**Create session notes:**
+```
+npx ts-node ${CLAUDE_PLUGIN_ROOT}/scripts/new-session.ts '<campaign-name>'
+```
+Auto-increments session number and pre-fills PC names in the template.
 
 ## Rulings
 

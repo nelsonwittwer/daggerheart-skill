@@ -19,7 +19,16 @@ skills/
     scripts/
       validate-encounter.ts       # CLI: validate encounter JSON
       validate-skill.ts           # CLI: validate SKILL.md against conventions
-src/                              # Encounter validator source + tests
+scripts/
+  init-campaign.ts                # CLI: scaffold a new campaign directory
+  create-pc.ts                    # CLI: save a PC JSON from character creation
+  new-session.ts                  # CLI: create numbered session notes
+src/
+  types.ts                        # Encounter + Campaign + PC type definitions
+  encounter-validator.ts          # Encounter validation engine
+  encounter-validator.test.ts     # Encounter validator tests (33)
+  campaign.ts                     # Campaign pure functions
+  campaign.test.ts                # Campaign function tests (32)
 ```
 
 **Rules reference** (`skills/daggerheart/docs/`): classes, ancestries, communities, core mechanics, combat, equipment, GM guidance, 100+ adversary stat blocks, environments, domain cards, and the Witherwild campaign frame.
@@ -33,6 +42,34 @@ A TypeScript validation engine that agents run to verify encounter balance. Give
 - **Stat block validation** — checks against tier benchmarks
 - **Composition analysis** — type mix, tier mismatches, warnings
 
+### Campaign State (`scripts/`)
+
+Scripts to persist campaign data across sessions. Campaigns are saved in the **user's working directory** under `campaigns/`.
+
+```bash
+# Initialize a new campaign (creates campaigns/<name>/)
+npm run init-campaign -- 'forest-of-whispers' 4
+
+# Save a PC from character creation (outputs JSON to campaigns/<name>/pcs/)
+npm run create-pc -- 'forest-of-whispers' '<PC JSON>'
+
+# Create a new session notes file (auto-increments, pre-fills PC names)
+npm run new-session -- 'forest-of-whispers'
+```
+
+**Campaign directory structure:**
+```
+campaigns/<campaign-name>/
+  campaign.json              # Campaign metadata (tier, PCs, session count)
+  pcs/
+    <pc-name>.json           # One per PC — full character sheet as JSON
+  sessions/
+    session-001.md           # Session notes with encounter log, Hope tracker
+    session-002.md
+```
+
+PC JSON files follow the 9-step Daggerheart character creation process: class, subclass, heritage (ancestry + community), traits, equipment, background, experiences, domain cards, and connections.
+
 ## Installation
 
 Install from the official Claude Code plugin marketplace:
@@ -45,7 +82,7 @@ Install from the official Claude Code plugin marketplace:
 
 ```bash
 npm install
-npm test              # 33 tests
+npm test              # 65 tests
 npm run build         # compile TypeScript
 npm run validate-skill  # check SKILL.md against skill spec
 ```

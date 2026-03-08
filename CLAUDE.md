@@ -15,14 +15,24 @@ skills/
     scripts/
       validate-encounter.ts        # CLI: validate an encounter JSON
       validate-skill.ts            # CLI: validate SKILL.md against conventions
-src/                               # Encounter validator source + tests
+scripts/
+  init-campaign.ts                 # CLI: scaffold a new campaign directory
+  create-pc.ts                     # CLI: save a PC JSON from character creation
+  new-session.ts                   # CLI: create numbered session notes
+src/
+  types.ts                         # Encounter + Campaign + PC types
+  encounter-validator.ts           # Encounter validation engine + tests
+  campaign.ts                      # Campaign pure functions + tests
 ```
 
 ## Commands
 
-- `npm test` — Run Jest tests (encounter validator)
+- `npm test` — Run Jest tests (65 tests: encounter validator + campaign functions)
 - `npm run validate-skill` — Check SKILL.md against skill spec conventions
 - `npm run validate-encounter -- '<JSON>'` — Validate an encounter
+- `npm run init-campaign -- '<name>' <num-pcs> [tier]` — Scaffold a campaign directory
+- `npm run create-pc -- '<campaign>' '<PC JSON>'` — Save a PC JSON file
+- `npm run new-session -- '<campaign>'` — Create a new session notes file
 
 ## Editing the Skill
 
